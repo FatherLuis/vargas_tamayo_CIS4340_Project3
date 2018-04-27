@@ -5,19 +5,23 @@
  */
 package vargas_tamayo_cis4340_project3;
 
-/**
- *
- * @author fathe
- */
+
 public class RuleBookGUI extends javax.swing.JDialog {
 
-    /**
-     * Creates new form RuleBookGUI
-     */
-    public RuleBookGUI(java.awt.Frame parent, boolean modal) {
+
+    private HashRuleBook book;
+    
+    
+    public RuleBookGUI(java.awt.Frame parent, boolean modal) 
+    {
         super(parent, modal);
         initComponents();
+        book = new HashRuleBook();
     }
+    
+    public HashRuleBook GetRuleBook(){return this.book;}
+    public void SetRuleBook(HashRuleBook book){this.book = book;}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,30 +40,47 @@ public class RuleBookGUI extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txtDirectionChange = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtIncomingsState = new javax.swing.JTextField();
+        txtIncomingState = new javax.swing.JTextField();
         txtIncomingLetter = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstRuleDisplay = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnDeleteRule = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(844, 811));
+        setMaximumSize(new java.awt.Dimension(850, 800));
+        setPreferredSize(new java.awt.Dimension(850, 800));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel3.setText(") =");
 
+        txtNewState.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel4.setText(",");
 
+        txtPhaseChange.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel5.setText(",");
 
+        txtDirectionChange.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel6.setText(")");
 
+        txtIncomingState.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        txtIncomingLetter.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("G (");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setText(",");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -70,7 +91,7 @@ public class RuleBookGUI extends javax.swing.JDialog {
                 .addGap(63, 63, 63)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtIncomingsState, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIncomingState, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -96,7 +117,7 @@ public class RuleBookGUI extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIncomingsState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIncomingState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIncomingLetter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNewState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPhaseChange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,17 +131,34 @@ public class RuleBookGUI extends javax.swing.JDialog {
                 .addGap(31, 31, 31))
         );
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("RuleBook");
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jScrollPane2.setViewportView(jList1);
+        lstRuleDisplay.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lstRuleDisplay.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(lstRuleDisplay);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jButton1.setText("Create Rule");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jButton2.setText("Delete All Rules");
 
-        jButton3.setText("Delete Rule");
+        btnDeleteRule.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        btnDeleteRule.setText("Delete Rule");
+        btnDeleteRule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteRuleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,7 +181,7 @@ public class RuleBookGUI extends javax.swing.JDialog {
                         .addGap(293, 293, 293))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDeleteRule, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(150, 150, 150))
@@ -153,7 +191,7 @@ public class RuleBookGUI extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,12 +200,25 @@ public class RuleBookGUI extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDeleteRule, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDeleteRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRuleActionPerformed
+        
+        //lstRuleDisplay.getSelectedIndex()
+   
+    }//GEN-LAST:event_btnDeleteRuleActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        book.HashRule(txtIncomingState.getText(), txtIncomingLetter.getText(), txtNewState.getText(), txtPhaseChange.getText(), txtDirectionChange.getText());
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,9 +263,9 @@ public class RuleBookGUI extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeleteRule;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -222,12 +273,12 @@ public class RuleBookGUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> lstRuleDisplay;
     private javax.swing.JTextField txtDirectionChange;
     private javax.swing.JTextField txtIncomingLetter;
-    private javax.swing.JTextField txtIncomingsState;
+    private javax.swing.JTextField txtIncomingState;
     private javax.swing.JTextField txtNewState;
     private javax.swing.JTextField txtPhaseChange;
     // End of variables declaration//GEN-END:variables

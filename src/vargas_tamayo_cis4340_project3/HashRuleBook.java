@@ -5,10 +5,7 @@
  */
 package vargas_tamayo_cis4340_project3;
 
-/**
- *
- * @author fathe
- */
+
 public class HashRuleBook 
 {
     private String[][] RuleBook;
@@ -19,6 +16,8 @@ public class HashRuleBook
         RuleBook = new String[260][1];
     }
     
+    public void SetRuleBook(String[][] RuleBook){this.RuleBook = RuleBook;}
+    public String[][] GetRuleBook(){return this.RuleBook;}
     
     private int CreateKey(String incomingState, String letter)
     {
@@ -153,10 +152,8 @@ public class HashRuleBook
     public String[] Instructions(String incomingState, String incomingLetter)
     {
         int key = CreateKey(incomingState, incomingLetter);
-        String[] box = new String[-1];
-        
+        String[] box = {"-1","-1","-1"};
         try{ box = RuleBook[key];} catch(Exception ex){System.out.println("Rule Does not Exist");}
-   
         return box;
     }
     

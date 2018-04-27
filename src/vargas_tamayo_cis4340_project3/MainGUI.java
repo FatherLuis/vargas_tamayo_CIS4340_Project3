@@ -5,17 +5,17 @@
  */
 package vargas_tamayo_cis4340_project3;
 
-/**
- *
- * @author fathe
- */
+
+
+
 public class MainGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainGUI
-     */
-    public MainGUI() {
+    HashRuleBook officialBook;
+    
+    public MainGUI() 
+    {
         initComponents();
+        officialBook = new HashRuleBook();
     }
 
     /**
@@ -33,6 +33,7 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(400, 530));
         setPreferredSize(new java.awt.Dimension(400, 530));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
@@ -95,15 +96,13 @@ public class MainGUI extends javax.swing.JFrame {
         RuleBook.setModal(true);
         RuleBook.setVisible(true);
         
-        this.setVisible(false);
-        
-        
+        officialBook = RuleBook.GetRuleBook();
+        RuleBook.dispose();
         
     }//GEN-LAST:event_btnEditRuleBookActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
