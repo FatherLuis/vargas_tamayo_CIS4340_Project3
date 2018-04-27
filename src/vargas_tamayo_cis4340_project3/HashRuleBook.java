@@ -157,6 +157,32 @@ public class HashRuleBook
         return box;
     }
     
+    public boolean CheckString(String userInput)
+    {
+        String finalState = "2";
+        boolean isAccepted = false;
+        
+        
+        
+        
+    
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+        return isAccepted;
+    }
+    
     
     
     
