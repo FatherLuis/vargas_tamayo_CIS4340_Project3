@@ -217,6 +217,11 @@ public class RuleBookGUI extends javax.swing.JDialog {
         
         book.HashRule(txtIncomingState.getText(), txtIncomingLetter.getText(), txtNewState.getText(), txtPhaseChange.getText(), txtDirectionChange.getText());
         
+        txtIncomingState.setText("");
+        txtIncomingLetter.setText("");
+        txtNewState.setText("");
+        txtPhaseChange.setText("");
+        txtDirectionChange.setText("");
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

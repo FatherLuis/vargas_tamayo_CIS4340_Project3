@@ -37,9 +37,10 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" max="32767" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnCheck" min="-2" pref="204" max="-2" attributes="0"/>
-                          <Component id="txtUserInput" min="-2" pref="291" max="-2" attributes="0"/>
+                          <Component id="txtUserInput" pref="291" max="32767" attributes="0"/>
+                          <Component id="lblStatus" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -52,14 +53,16 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="70" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel1" max="32767" attributes="0"/>
-                  <Component id="txtUserInput" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="lblStatus" min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtUserInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnCheck" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace pref="105" max="32767" attributes="0"/>
+              <EmptySpace pref="111" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,6 +100,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Check"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheckActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblStatus">
     </Component>
   </SubComponents>
 </Form>

@@ -5,6 +5,9 @@
  */
 package vargas_tamayo_cis4340_project3;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 
@@ -27,17 +30,23 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnRunProgram = new javax.swing.JButton();
         btnEditRuleBook = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnFile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 530));
         setPreferredSize(new java.awt.Dimension(400, 530));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
-        jButton1.setText("Run Program");
+        btnRunProgram.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        btnRunProgram.setText("Run Program");
+        btnRunProgram.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRunProgramActionPerformed(evt);
+            }
+        });
 
         btnEditRuleBook.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
         btnEditRuleBook.setText("Edit RuleBook");
@@ -56,21 +65,29 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel1.setFocusable(false);
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        btnFile.setText("Upload File");
+        btnFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEditRuleBook, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                .addContainerGap(109, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRunProgram, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditRuleBook, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(btnFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,10 +95,12 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addComponent(btnRunProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btnFile, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addComponent(btnEditRuleBook, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
@@ -100,6 +119,27 @@ public class MainGUI extends javax.swing.JFrame {
         RuleBook.dispose();
         
     }//GEN-LAST:event_btnEditRuleBookActionPerformed
+
+    private void btnRunProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunProgramActionPerformed
+        
+        ProgramGUI PG = new ProgramGUI(this, true);
+        PG.SetRuleBook(officialBook);
+        PG.setVisible(true);
+      
+    }//GEN-LAST:event_btnRunProgramActionPerformed
+
+    private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
+      
+        File_IO uploadFile = new File_IO();
+        
+        try {
+            uploadFile.readFile();
+        } catch (Exception ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_btnFileActionPerformed
 
 
     
@@ -137,7 +177,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditRuleBook;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnFile;
+    private javax.swing.JButton btnRunProgram;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

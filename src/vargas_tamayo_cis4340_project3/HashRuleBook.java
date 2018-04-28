@@ -149,7 +149,7 @@ public class HashRuleBook
         RuleBook[key] = box;
     }
     
-    public String[] Instructions(String incomingState, String incomingLetter)
+    private String[] Instructions(String incomingState, String incomingLetter)
     {
         int key = CreateKey(incomingState, incomingLetter);
         String[] box = {"-1","-1","-1"};
@@ -157,10 +157,51 @@ public class HashRuleBook
         return box;
     }
     
+    private int PhaseChanger(String letter)
+    {
+        if(letter.equals("R"))
+        {
+            return 1;
+        }
+        else if(letter.equals("L"))
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+    
+    }
+    
     public boolean CheckString(String userInput)
     {
+        String strInput = "  " + userInput + "  ";
+        char[] medium;
+        String currentState = "1";
+        int index = 2;
         String finalState = "2";
         boolean isAccepted = false;
+        
+        //Character.toString(userInput.charAt(i))
+        
+        try
+        {
+            while(true)
+            {
+                String[] box = Instructions(currentState, Character.toString(strInput.charAt(index)));
+                currentState = box[0];
+                
+                medium = strInput.toCharArray();
+                medium[index] = box[1].charAt(0);
+                strInput = String.valueOf(medium);
+                
+                index+= PhaseChanger(box[3]);
+
+            }
+
+        }catch(Exception ex){System.out.println("Something Went Wrong...Fix it");}
+        
         
         
         
