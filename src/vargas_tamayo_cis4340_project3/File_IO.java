@@ -5,10 +5,7 @@
  */
 package vargas_tamayo_cis4340_project3;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,25 +52,47 @@ public class File_IO
             
             String ptnOldState = "(?<=\\()\\s*\\d*";
             String ptnOldVar = "(?<=\\,)\\s*\\w*";
-            String ptnNewState = "(?<=[=(])\\s*\\d*";
-            String ptnNewVar = "";
-            String ptnPhaseChange = " "; 
+            String ptnNewState = "(?<=\\=\\()\\s*\\d*";
+            String ptnNewVar = "(?<=\\,)\\s*\\w*\\s*(?=\\,)";
+            String ptnPhaseChange = "(?<=\\,)\\s*\\w\\s*(?=\\))"; 
             
             Pattern ptn = Pattern.compile(ptnOldState);
             Matcher match = ptn.matcher(strRule);
-            
             if(match.find())
             {
                 System.out.println("Found: " + match.group(0));
             }
             
-            ptn = Pattern.compile(ptnOldState);
+            ptn = Pattern.compile(ptnOldVar);
             match = ptn.matcher(strRule);
-            
             if(match.find())
             {
                 System.out.println("Found: " + match.group(0));
             }
+            
+            //if statement for accept needed
+            ptn = Pattern.compile(ptnNewState);
+            match = ptn.matcher(strRule);
+            if(match.find())
+            {
+                System.out.println("Found: " + match.group(0));
+            }
+            
+            ptn = Pattern.compile(ptnNewVar);
+            match = ptn.matcher(strRule);
+            if(match.find())
+            {
+                System.out.println("Found: " + match.group(0));
+            }
+            
+            ptn = Pattern.compile(ptnPhaseChange);
+            match = ptn.matcher(strRule);
+            if(match.find())
+            {
+                System.out.println("Found: " + match.group(0));
+            }            
+            
+            
                 
         
         
