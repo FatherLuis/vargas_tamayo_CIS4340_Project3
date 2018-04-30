@@ -134,6 +134,9 @@ public class MainGUI extends javax.swing.JFrame {
         
         try {
             uploadFile.readFile();
+            officialBook = uploadFile.GetRuleBook();
+            
+            
         } catch (Exception ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
