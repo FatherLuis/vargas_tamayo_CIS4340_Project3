@@ -12,10 +12,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 
-/**
- *
- * @author fathe
- */
+//Class name: File_IO
+//Class Author: Luis E. Vargas Tamayo
+//Purpose of the class: Reads the file for the rules for the turing machine
+//Date: 2/27/2018
+//List of changes with dates: none
+//Special Notes: Code would look cleaner if i would have made had more time
 public class File_IO 
 {
     File txtFile;
@@ -23,78 +25,117 @@ public class File_IO
     JFileChooser chooser;
     private HashRuleBook RuleBook;
     
+    //Method Name: File_IO()
+    //Purpose: Constructor
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     public File_IO()
     {
-        chooser = new JFileChooser(); //creates the file dialog box to get a file from computer
-        chooser.showOpenDialog(null); //shows the dialog box
-        
-        txtFile =  chooser.getSelectedFile();
+        String userDirLocation = System.getProperty("user.dir");
+        //Gets file
+        try
+        {
+            txtFile = new File(userDirLocation);
+            chooser = new JFileChooser(txtFile); //creates the file dialog box to get a file from computer
+            chooser.showOpenDialog(null); //shows the dialog box
+            txtFile =  chooser.getSelectedFile();
+        }
+        catch(Exception ex){}
+ 
+        //initiate hashtable
         RuleBook = new HashRuleBook();
     }
-    
+ 
+    //Method Name: File_IO()
+    //Purpose: Constructor
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     public HashRuleBook GetRuleBook(){return this.RuleBook;}
     
-    public void readFile() throws Exception
+    //Method Name: GetFileName()
+    //Purpose: get filename from class variabale
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
+    public String GetFileName(){return fileName;}
+      
+    //Method Name: ReadFile()
+    //Purpose: Reads each line of the text file and gets the rules and place sthem in the hashtable
+    //Parameter: none
+    //Method Input: CreateRuleBook()
+    //Return Value: none
+    //Date: 4/30/2018
+    public void ReadFile() throws Exception
     {
         //String filePath = txtFile.getAbsolutePath(); //gets file's path
         fileName = txtFile.getName();      
         //BufferedReader br = new BufferedReader(new FileReader(fileName));    //not sure what this is
 
             Scanner sc = new Scanner(txtFile);  
-            
+             //CHECKS IS THERE EXIST ANOTHER LINE IN THE TEXT FILE
             while(sc.hasNextLine())
             {
+                //SENDS THE LINE WITH CODE TO THE METHOD
                 CreateRulebook(sc.nextLine());
             }
 
     }
-    
+        
+    //Method Name: CreateRulebook()
+    //Purpose: Creates the rule book from the rules found in the file
+    //Parameter: string
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     private void CreateRulebook(String strRule)
     {
+        //ARRAY WILL HOLD THE RULES
         String[] rule = new String[5];
-        
-        System.out.println("strRule " + strRule);
+
+        // CHECKS IF THE STRING IS EMPTY
         if(!strRule.isEmpty())
         {
             
-            String ptnAccept = "Accept";
-            String ptnOldState = "(?<=\\()\\s*\\d*";
-            String ptnOldVar = "(?<=\\,)\\s*\\w*";
-            String ptnNewState = "(?<=\\=\\()\\s*\\d*";
-            String ptnNewVar = "(?<=\\,)\\s*\\w*\\s*(?=\\,)";
-            String ptnPhaseChange = "[R|L]"; 
+            //THESE ARE THE PATTERNS I AM LOOKING FOR IN EACH LINE FROM THE TEXT
             
+            String ptnAccept = "Accept"; //LOOKS TO SEE IF THE STRING CONTAINS THE ACCEPT
+            String ptnOldState = "(?<=\\()\\s*\\d*"; // LOOKS FOR THE CURRENT STATE
+            String ptnOldVar = "(?<=\\,)\\s*\\w*"; //LOOKS FOR THE CURRENT VARIABLE
+            String ptnNewState = "(?<=\\=\\()\\s*\\d*"; // LOOKDS FOR THE NEW STATE
+            String ptnNewVar = "(?<=\\,)\\s*\\w*\\s*(?=\\,)"; //LOOKS FOR THE NEW VARIABLE
+            String ptnPhaseChange = "[R|L]";  //LOOKS FOR THE PHASE CHANGERS
             
+            //LOOKS FOR THE CURRENT STATE
             Pattern ptn = Pattern.compile(ptnOldState);
             Matcher match = ptn.matcher(strRule);
             if(match.find())
             {
                 rule[0] = match.group(0);
-                System.out.println("Found: " + match.group(0));
                 
                 if(match.group(0).isEmpty())
                 {
-                    System.out.println("Cannot be empty");
                     rule[1] = "";
                 }
             }
             else
             {
-                System.out.println("Cannot be empty");
+                rule[1] = "";
             }
                        
 
-
+            //LOOKS FOR THE CURRENT VARIABLE
             ptn = Pattern.compile(ptnOldVar);
             match = ptn.matcher(strRule);
             if(match.find())
             {
-                rule[1] = match.group(0);
-                System.out.println("Found: " + match.group(0));
-                
+                rule[1] = match.group(0);  
                 if(match.group(0).isEmpty())
                 {
-                    System.out.println("empty");
                     rule[1] = "";
                 }
             }
@@ -103,24 +144,24 @@ public class File_IO
                 rule[1] = "";
             
             }
-                    
+            
+            //LOOKS FOR THE NEW STATE
             ptn = Pattern.compile(ptnNewState);
             match = ptn.matcher(strRule);
             if(match.find())
             {
                 rule[2] = match.group(0);
-                System.out.println("Found: " + match.group(0));
                 
+                //LOOKS FOR THE NEW VARIABLE
                 ptn = Pattern.compile(ptnNewVar);
                 match = ptn.matcher(strRule);
                 if(match.find())
                 {
                     rule[3] = match.group(0);
-                    System.out.println("Found: " + match.group(0));
+
                     
                     if(match.group(0).isEmpty())
                     {
-                        System.out.println("empty");
                         rule[3] = "";
                     }
                 }
@@ -128,64 +169,48 @@ public class File_IO
                 {
                     rule[3] = "";
                 }
-
+                    
+                //LOOKS FOR THE PHASE CHANGER
                 ptn = Pattern.compile(ptnPhaseChange);
                 match = ptn.matcher(strRule);
                 if(match.find())
                 {
                     rule[4] = match.group(0);
-                    System.out.println("Found: " + match.group(0));
                     
                     if(match.group(0).isEmpty())
                     {
-                        System.out.println("Cannot be empty");
                         rule[4] = "";
                     }
                 } 
                 else
                 {
                     rule[4] = "";
-                    System.out.println("Cannot be empty");
                 }               
     
             }
             else
             {
+                //SINCE NO NEW STATE WAS FOUND, CHECK TO SEE IF YOU FIND THE ACCEPT
                 ptn = Pattern.compile(ptnAccept);
                 match = ptn.matcher(strRule);
                 if(match.find())
-                {
-                    System.out.println("Found: " + match.group(0));  
+                { 
                     rule[2] = "Accept";
                     rule[3] =  "Accept";
                     rule[4] = "Accept";     
                 }
+                //SINCE NEITHER THE ACCEPT OF A NEW STATE WAS FOUND, WE SET THE BOX AS EMPTY
                 else
                 {
                     rule[2] = "";
                     rule[3] = "";
                     rule[4] = ""; 
-                    System.out.println("Cannot be empty");
-                
                 }
             }
-            
-            
-            System.out.println(Arrays.toString(rule) + "\n");
+            //System.out.println(Arrays.toString(rule) + "\n");
         
             RuleBook.HashRule(rule[0], rule[1], rule[2], rule[3], rule[4]);
         
         }
-    
-    
-    
-    
-    
-    }
-    
-    
-    
-    
-    
-    
+    }  
 }

@@ -7,27 +7,61 @@ package vargas_tamayo_cis4340_project3;
 
 import java.util.Arrays;
 
-
+//Class name: HashRuleBook
+//Class Author: Luis E. Vargas Tamayo
+//Purpose of the class: Stores the rules in a hashtable
+//Date: 4/30/2018
+//List of changes with dates: none
+//Special Notes: Code would look cleaner if i would have made had more time
 public class HashRuleBook 
 {
     private String[][] RuleBook;
     
-    
+    //Method Name: HashRuleBook()
+    //Purpose: Constructor
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     public HashRuleBook()
     {
+        //instantiate
         RuleBook = new String[270][1];
     }
-    
+       
+    //Method Name:SetRuleBook()
+    //Purpose: Setter
+    //Parameter: String[][]
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     public void SetRuleBook(String[][] RuleBook){this.RuleBook = RuleBook;}
+     
+    //Method Name:
+    //Purpose: Getter
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     public String[][] GetRuleBook(){return this.RuleBook;}
-    
+     
+    //Method Name: CreateKey
+    //Purpose: Creates the key for where the rules are located in the hashtable
+    //Parameter: String, String
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     private int CreateKey(String incomingState, String letter)
     {
+        //Key-Value
         int key = 0;
+        //Letter Value
         int value;
         
+        //VALUE OF EACH LETTER IS GIVEN IN EACH CASE
         switch(letter)
         {
+            //SPACES ARE GIVEN A ZERO VALUE
             case " ":
                 key = Integer.parseInt(incomingState);
                 break;
@@ -136,8 +170,9 @@ public class HashRuleBook
                 key = value + Integer.parseInt(incomingState);
                 break;            
             default:
-                System.out.println("Something is Wrong");
-                
+                key = 0;
+                //only reason it would reach default is because the string
+                //is not a letter, rather a special character
         }
     
     
@@ -146,50 +181,68 @@ public class HashRuleBook
     
         return key;
     }
-    
+      
+    //Method Name: HashRule()
+    //Purpose: Places the rules in the hashable
+    //Parameter: String incomingState, String incomingLetter, String newState, String phaseChange, String directionChange
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     public void HashRule(String incomingState, String incomingLetter, String newState, String phaseChange, String directionChange)
     {
+        //Creates key for allocating the rule in the hashtable
         int key = CreateKey(incomingState, incomingLetter);
-        String[] box = {newState, phaseChange, directionChange};       
+        //Array will hold the rule
+        String[] box = {newState, phaseChange, directionChange};      
+        //places the rules in the hashtable in the allocated key location
         RuleBook[key] = box;
     }
-    
+      
+    //Method Name: Instructions
+    //Purpose: Gets rule from the hashtable
+    //Parameter: String incomingState, String incomingLetter
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     private String[] Instructions(String incomingState, String incomingLetter)
     {
+        //Gets key, if exist, FROM THE GIVEN PARAMETERS
         int key = CreateKey(incomingState, incomingLetter);
+        //INSTANTIATES
         String[] box = null;
+        
+        //TRY CATCH IS USED BECAUSE THE RULE MIGHT NOT EXIST AND THUS SOME CODE
+        //WILL NOT WORK
         try
         {
-
+            //GETS THE RULES FROM THE HASHTABLE
             box = RuleBook[key];
             
         } catch(Exception ex){System.out.println("Rule Does not Exist");}
-                
-            System.out.println("             Box status: "+Arrays.toString(box));
             
             if(box[0] == null)
             {
                 box = null;
             }
             else
-            {
-                
-                System.out.println("             1___________Random");
-                
+            {          
+                //CHEKS IF THE RULES ARE COMPLETE, IF THEY ARE NOT, THEN SET THE BOX AS NULL
                 if(box[0].isEmpty() || box[2].isEmpty())
                 {
                     box = null;      
                 }
-                
-                System.out.println("             2___________Random");
-
             }
-            //System.out.println(Arrays.toString(box));
             
             return box;   
 
     }
-    
+        
+    //Method Name: PhaseChanger
+    //Purpose: returns a numeric value of the representation of the given letter
+    //Parameter: String
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     private int PhaseChanger(String letter)
     {       
         if(letter.equals("R"))
@@ -203,29 +256,32 @@ public class HashRuleBook
 
             return 0;
     }
-    
+       
+    //Method Name: CheckString
+    //Purpose: checks if a string follows the rules
+    //Parameter: String
+    //Method Input: none
+    //Return Value: Boolean
+    //Date: 4/30/2018
     public boolean CheckString(String userInput)
     {
+        //Gives an extra space before and after the string
         String strInput = "  " + userInput + "  ";
+        //variable that holds an array of char
         char[] medium;
+        //the beginning state is always one
         String currentState = "1";
-        int index = 2;
-        //String finalState = "2";
-        boolean isAccepted = false;
-        
-        //Character.toString(userInput.charAt(i))
-        
+        int index = 2; // the string starts on index 2
+
+        //MOST ERRORS OCCUR BECAUSE RULE IS NOT FOUND
         try
         {
+            //LOOPS UNTIL FOREVER
             while(true)
             {
-                System.out.println("\n1--------------------1");
+                //GETS RULES FROM HASHTABLE
                 String[] box = Instructions(currentState, Character.toString(strInput.charAt(index)));
-                System.out.println("2--------------------2");
-                
-                System.out.println("\n"+Arrays.toString(box));
-                
-                
+
                 if(box != null)
                 {
                     if(box[0].equals("Accept"))
@@ -234,13 +290,12 @@ public class HashRuleBook
                     }
                     else
                     {
+                        //CHANGES THE STRING TO THE CHANGES ASKED BY THE RULES
                         currentState = box[0];
-   
                         medium = strInput.toCharArray();
                         medium[index] = box[1].charAt(0);
                         strInput = String.valueOf(medium);
-                        //System.out.println(strInput);
-
+                        //MOVES THE HEAD TO THE NEXT LOCATION
                         index += PhaseChanger(box[2]);  
                     }
                     
@@ -251,10 +306,10 @@ public class HashRuleBook
                 }
             }
 
-        }catch(Exception ex){ System.out.println("Something Went Wrong...Fix it");}
+        }catch(Exception ex){ System.out.println("Rule was not found");}
         
 
-        return isAccepted;
+        return false;
     }
     
     

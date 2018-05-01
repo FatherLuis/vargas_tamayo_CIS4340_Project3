@@ -7,14 +7,26 @@ package vargas_tamayo_cis4340_project3;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 
-
+//Class name: MainGUI
+//Class Author: Luis E. Vargas Tamayo
+//Purpose of the class: Main GUI when program is run
+//Date: 4/30/2018
+//List of changes with dates: none
+//Special Notes: none
 public class MainGUI extends javax.swing.JFrame {
 
-    HashRuleBook officialBook;
+    private HashRuleBook officialBook;
     
+        //Method Name:
+    //Purpose:MainGUI()
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     public MainGUI() 
     {
         initComponents();
@@ -31,10 +43,11 @@ public class MainGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         btnRunProgram = new javax.swing.JButton();
-        btnEditRuleBook = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnFile = new javax.swing.JButton();
+        lblFileName = new javax.swing.JLabel();
+        lblOpen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 530));
@@ -48,16 +61,13 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        btnEditRuleBook.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
-        btnEditRuleBook.setText("Edit RuleBook");
-        btnEditRuleBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditRuleBookActionPerformed(evt);
-            }
-        });
-
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
         jButton3.setText("Exit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -65,6 +75,7 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel1.setFocusable(false);
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        btnFile.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
         btnFile.setText("Upload File");
         btnFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,35 +83,49 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        lblFileName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblFileName.setText("No File Selected...");
+
+        lblOpen.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblFileName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(94, 94, 94)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnFile, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(btnRunProgram, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(lblOpen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 102, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRunProgram, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEditRuleBook, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(btnFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(lblFileName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnRunProgram, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btnFile, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(btnEditRuleBook, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblOpen)
+                .addGap(54, 54, 54)
+                .addComponent(btnFile, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
@@ -108,41 +133,63 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditRuleBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRuleBookActionPerformed
-        
-        RuleBookGUI RuleBook = new RuleBookGUI(this, true);
-        
-        RuleBook.setModal(true);
-        RuleBook.setVisible(true);
-        
-        officialBook = RuleBook.GetRuleBook();
-        RuleBook.dispose();
-        
-    }//GEN-LAST:event_btnEditRuleBookActionPerformed
-
+    //Method Name: btnRunProgramActionPerformed
+    //Purpose:open form that allows user to check for strings that follow the rules from the file
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     private void btnRunProgramActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunProgramActionPerformed
         
-        ProgramGUI PG = new ProgramGUI(this, true);
-        PG.SetRuleBook(officialBook);
-        PG.setVisible(true);
+        //checks if a file has been uploaded
+        if(!lblFileName.getText().equals("No File Selected..."))
+        {
+            //creates object
+            ProgramGUI PG = new ProgramGUI(this, true);
+            //gives the rulebook to the object
+            PG.SetRuleBook(officialBook);
+            //object is now visible
+            PG.setVisible(true);
+        }
+        else
+        {
+            lblOpen.setText("Upload an appropiate text file");
+        }
       
     }//GEN-LAST:event_btnRunProgramActionPerformed
-
+    
+    //Method Name:BtnFileActionPerformed
+    //Purpose: allows user to uploaded a text file containing the rules needed for the program
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
       
+        //creats object
         File_IO uploadFile = new File_IO();
         
         try {
-            uploadFile.readFile();
+            //TRIES TO READ FILE
+            uploadFile.ReadFile();
+            //RETURNS THE RULES FROM THE FILE
             officialBook = uploadFile.GetRuleBook();
+            //SETS THE NAME OF THE FILE
+            lblFileName.setText(uploadFile.GetFileName());
+
             
-            
-        } catch (Exception ex) {
-            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) { lblFileName.setText("No File Selected...");
+            //Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        lblOpen.setText("");
         
         
     }//GEN-LAST:event_btnFileActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     
@@ -179,10 +226,11 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditRuleBook;
     private javax.swing.JButton btnFile;
     private javax.swing.JButton btnRunProgram;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblFileName;
+    private javax.swing.JLabel lblOpen;
     // End of variables declaration//GEN-END:variables
 }

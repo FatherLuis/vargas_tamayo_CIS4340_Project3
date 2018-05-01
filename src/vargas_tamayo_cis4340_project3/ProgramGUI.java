@@ -5,23 +5,35 @@
  */
 package vargas_tamayo_cis4340_project3;
 
-/**
- *
- * @author fathe
- */
+//Class name: ProgramGUI
+//Class Author: Luis E. Vargas Tamayo
+//Purpose of the class: Allow the user to enter a string in the textbox and see if the word is accepted in te rules
+//Date: 4/30/2018
+//List of changes with dates: none
+//Special Notes: Code would look cleaner if i would have made had more time
 public class ProgramGUI extends javax.swing.JDialog 
 {
 
     HashRuleBook book;
     
-    public void SetRuleBook(HashRuleBook book){this.book = book;}
-    
-    
-    
+    //Method Name: 
+    //Purpose: Constructor
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     public ProgramGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
+    
+    //Method Name: SetRuleBook()
+    //Purpose: Set the rulebook
+    //Parameter: HashRuleBook 
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
+    public void SetRuleBook(HashRuleBook book){this.book = book;}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,7 +51,6 @@ public class ProgramGUI extends javax.swing.JDialog
         lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setLocationByPlatform(true);
         setMaximumSize(new java.awt.Dimension(600, 350));
         setPreferredSize(new java.awt.Dimension(600, 350));
 
@@ -97,15 +108,22 @@ public class ProgramGUI extends javax.swing.JDialog
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Method Name: btnCheckActionPerformed()
+    //Purpose: Checks if the string follows the rules from the rulebook
+    //Parameter: none
+    //Method Input: none
+    //Return Value: none
+    //Date: 4/30/2018
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
      
+        // CHECKS IF THE STRING FOLLOWS THE RULES SET UPON BY THE RULEBOOK
         if(book.CheckString(txtUserInput.getText()))
         {
-            lblStatus.setText("It works");    
+            lblStatus.setText("Word is Accepted");    
         }
         else
         {
-            lblStatus.setText("Yeah, how about no");
+            lblStatus.setText("Word is not Accepted.");
         }
         
         
